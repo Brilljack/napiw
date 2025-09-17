@@ -580,7 +580,7 @@ audio.canplay + .time_now {
     z-index: 1000;
     opacity: 0;
     animation: fadeIn 1s ease forwards;
-    /* animation-delay: 40s; */
+    animation-delay: 40s;
 }
 
 .next-button {
