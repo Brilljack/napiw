@@ -147,6 +147,9 @@ function initializeFlowerPage() {
   textElements.forEach((element) => {
     const randomDelay = Math.random() * 2;
     element.style.animationDelay = randomDelay + 's';
+
+    // Tambahkan baris ini untuk mengubah ukuran font
+    element.style.fontSize = '35px'; // Ganti dengan ukuran yang Anda inginkan
   });
 
   // Event listener untuk tombol Open di flower page
