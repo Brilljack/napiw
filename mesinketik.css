@@ -1,0 +1,617 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Playfair+Display:wght@600&display=swap');
+
+body {
+    background-color: #2c3e50;
+    margin: 0;
+    height: 125vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+:root {
+  --paper: #EDE8D0;
+}
+
+.clickable{
+  -webkit-tap-highlight-color: transparent;
+}
+
+.wrapper {
+    transform: scale(1.8); /* merubah ukuran mesin ketik */
+    position: relative;
+    top: 100px;
+}
+
+.typewriter {
+  --blue: #5C86FF;
+  --blue-dark: #275EFE;
+  --key: #fff;
+  --paper: #EDE8D0;
+  --text: #D3D4EC;
+  --tool: #FBC56C;
+  --duration: 3s; /* Menambahkan durasi animasi keluar*/
+  --paper-duration: 40s; /* Menambahkan durasi animasi kertas keluar*/
+  position: relative;
+  animation: bounce05 calc(var(--duration) * 0.5) linear;
+  animation-iteration-count: 19; /* Menambahkan animasi bounce 19 kali */
+}
+
+.typewriter .slide {
+  width: 92px;
+  height: 20px;
+  border-radius: 3px;
+  margin-left: 14px;
+  transform: translateX(14px);
+  background: linear-gradient(var(--blue), var(--blue-dark));
+  -webkit-animation: slide05 var(--duration) ease infinite;
+  animation: slide05 var(--duration) ease infinite;
+}
+
+.typewriter .slide:before, .typewriter .slide:after,
+.typewriter .slide i:before {
+  content: "";
+  position: absolute;
+  background: var(--tool);
+}
+
+.typewriter .slide:before {
+  width: 2px;
+  height: 8px;
+  top: 6px;
+  left: 100%;
+}
+
+.typewriter .slide:after {
+  left: 94px;
+  top: 3px;
+  height: 14px;
+  width: 6px;
+  border-radius: 3px;
+}
+
+.typewriter .slide i {
+  display: block;
+  position: absolute;
+  right: 100%;
+  width: 6px;
+  height: 4px;
+  top: 4px;
+  background: var(--tool);
+}
+
+.typewriter .slide i:before {
+  right: 100%;
+  top: -2px;
+  width: 4px;
+  border-radius: 2px;
+  height: 14px;
+}
+
+.typewriter .paper {
+  position: absolute;
+  left: 15px;
+  top: -230px; /* merubah posisi kertas */
+  width: 90px;
+  height: 250px; /* merubah tinggi kertas */
+  border-radius: 5px;
+  background: var(--paper);
+  transform: translateY(285px);
+  animation: paper05 var(--paper-duration) ease-out forwards;
+  /* Background baru dengan efek vintage */
+  background: 
+    /* NEW: Menambahkan noise texture */
+    url("data:image/png;base64,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"),
+    /* NEW: Menambahkan gradient untuk efek lusuh */
+    linear-gradient(45deg, transparent 48%, rgba(0,0,0,0.01) 50%, transparent 52%),
+    linear-gradient(-45deg, transparent 48%, rgba(0,0,0,0.01) 50%, transparent 52%),
+    var(--paper);
+  background-size: 
+    /* NEW: Ukuran untuk noise dan gradient */
+    100% 100%,
+    150px 150px,
+    150px 150px;
+  background-blend-mode: multiply;
+
+  /* NEW: Menambahkan shadow untuk depth */
+  box-shadow: 
+    0 1px 3px rgba(0,0,0,0.12), 
+    0 1px 2px rgba(0,0,0,0.24);
+}
+
+.typewriter .paper::before {
+  /* content: "Teruntuk Tuan Putriku,\A\A Hari ini adalah hari yang istimewa, bukan hanya karena usiamu bertambah, tapi karena dunia kembali merayakan hadirnya kamu.\A\A Aku berdoa semoga langkahmu selalu ringan, jalanmu selalu dimudahkan, dan setiap mimpi yang kau rajut, diberikan kesempatan untuk terwujud.\A\A Semoga hatimu selalu dipenuhi kebahagiaan, lebih besar dari hari kemarin. \A\A Aku harap kamu selalu kuat, menjalani hari-hari yang mungkin tidak selalu mudah, dan jangan lupa bahwa aku di sini, selalu percaya, selalu mendukungmu.\A Stay happy and more love me sayang.\A Sekali lagi, Selamat ulang tahun Tuan Putriku.\A\A Dari aku:\A Masa Depanmu ♡"; */
+  content:  "Untuk Tuan Putriku\A\A"
+            "Terima kasih sudah datang di hidupku ya cantikk, dengan cara yang begitu tiba-tiba seolah semesta kirim kejutan yang indah banget buat aku. Datangnya kamu di hidupku bisa beri warna baru di hari-hariku, ngasih kehangatan, dan bawa kenyamanan yang selama ini aku cari.\A\A"
+            "Aku bener-bener bersyukur banget bisa ketemu kamu sayangku. Tiap ngobrol, tiap bercanda, bahkan tiap komunikasi kita rasanya berharga banget. Bisa denger suara kamu tiap hari bisa bikin aku tenang dan bahkan bisa bikin ilang semua capeknya hari-hariku.\A\A"
+            "Aku berharap ini semua bukan cuman kebetulan yaa. Semoga rasa kita satu sama lain selalu tumbuh, Sampai nanti melangkah bersama di masa depan. Semoga kita bisa sama-sama terus, saling jaga perasaan dan bisa jadi alasan buat bahagia sampai kapanpun.\A\A"
+            "Be happy, and let’s keep falling for each other.\A\A"
+            "Dari aku:\A"
+            "Masa Depanmu ♡";
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: -10px;
+  border-radius: 2px;
+  height: auto;
+  transform: scaleY(0.9);
+  background: transparent;
+  color: #3C3A2E;
+  font-family: 'Dancing Script', cursive;
+  font-size: 5px;
+  font-weight: 550;
+  white-space: pre-wrap;
+  line-height: 1.4;
+  padding: 8px;
+  letter-spacing: 0.3px;
+  text-shadow: 0.5px 0.5px 0px rgba(0,0,0,0.1);
+}
+
+.typewriter .paper::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+      radial-gradient(circle at 30% 40%, rgba(184, 166, 146, 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 70% 60%, rgba(172, 154, 134, 0.1) 0%, transparent 30%),
+      radial-gradient(circle at 90% 20%, rgba(165, 147, 127, 0.1) 0%, transparent 35%);
+  border-radius: 5px;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.typewriter .keyboard {
+  width: 120px;
+  height: 56px;
+  margin-top: -10px;
+  z-index: 1;
+  position: relative;
+}
+
+.typewriter .keyboard:before, .typewriter .keyboard:after {
+  content: "";
+  position: absolute;
+}
+
+.typewriter .keyboard:before {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 7px;
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
+  transform: perspective(10px) rotateX(2deg);
+  transform-origin: 50% 100%;
+}
+
+.typewriter .keyboard:after {
+  left: 2px;
+  top: 25px;
+  width: 11px;
+  height: 4px;
+  border-radius: 2px;
+  box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key), 60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key), 22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key), 60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
+  -webkit-animation: keyboard05 var(--duration) linear infinite;
+  animation: keyboard05 var(--duration) linear infinite;
+}
+
+@keyframes bounce05 {
+  0%, 40% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+  60% {
+    transform: translateY(2px);
+  }
+  70%, 100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide05 {
+  5% {
+    transform: translateX(14px);
+  }
+
+  15%, 30% {
+    transform: translateX(6px);
+  }
+
+  40%, 55% {
+    transform: translateX(0);
+  }
+
+  65%, 70% {
+    transform: translateX(-4px);
+  }
+
+  80%, 89% {
+    transform: translateX(-12px);
+  }
+
+  100% {
+    transform: translateX(14px);
+  }
+}
+
+@keyframes paper05 {
+  0% {
+    transform: translateY(285px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes keyboard05 {
+  5%, 12%, 21%, 30%, 39%, 48%, 57%, 66%, 75%, 84% {
+    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key), 60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key), 22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key), 60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
+  }
+
+  9% {
+    box-shadow: 15px 2px 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key), 60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key), 22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key), 60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
+  }
+
+  18% {
+    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key), 60px 2px 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key), 22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key), 60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
+  }
+
+  27% {
+    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key), 60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key), 22px 12px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key), 60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
+  }
+
+  36% {
+    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key), 60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key), 22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 12px 0 var(--key), 60px 12px 0 var(--key), 68px 12px 0 var(--key), 83px 10px 0 var(--key);
+  }
+
+  45% {
+    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key), 60px 0 0 var(--key), 75px 0 0 var(--key), 90px 2px 0 var(--key), 22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key), 60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
+  }
+
+  54% {
+    box-shadow: 15px 0 0 var(--key), 30px 2px 0 var(--key), 45px 0 0 var(--key), 60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key), 22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key), 60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
+  }
+
+  63% {
+    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key), 60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key), 22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key), 60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 12px 0 var(--key);
+  }
+
+  72% {
+    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 2px 0 var(--key), 60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key), 22px 10px 0 var(--key), 37px 10px 0 var(--key), 52px 10px 0 var(--key), 60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
+  }
+
+  81% {
+    box-shadow: 15px 0 0 var(--key), 30px 0 0 var(--key), 45px 0 0 var(--key), 60px 0 0 var(--key), 75px 0 0 var(--key), 90px 0 0 var(--key), 22px 10px 0 var(--key), 37px 12px 0 var(--key), 52px 10px 0 var(--key), 60px 10px 0 var(--key), 68px 10px 0 var(--key), 83px 10px 0 var(--key);
+  }
+}
+
+.typewriter .paper-hide {
+    position: absolute;
+    left: 0;
+    bottom: -180px;  /* posisi di bawah mesin ketik */
+    width: 120px;   /* sama dengan lebar keyboard */
+    height: 200px;
+    background-color: #2c3e50; /* sama dengan warna background */
+    z-index: 0;     /* di belakang mesin ketik tapi di depan kertas */
+}
+
+p {
+  margin: 0 0;
+  position: absolute;
+  font: 16px Verdana;
+  color: #eee;
+  height: 25px;
+  top: calc(100vh - 30px);
+  text-shadow: 0 0 2px white;
+}
+
+p a {
+  text-decoration: none;
+  color: #aaa;
+}
+
+span {
+  font-size: 11px;
+}
+
+p > a:first-of-type {
+  font-size: 20px;
+}
+
+.card {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  width: 250px;
+  height: 100px;
+  border-radius: 10px;
+  padding: 10px;
+  z-index: 10000;
+  transform: scale(1); /*Merubah ukuran card*/
+  transform-origin: bottom left;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position:absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  z-index: -1;
+}
+
+.top {
+  position: relative;
+  width: 100%;
+  display: flex;
+  gap: 10px;
+}
+
+.pfp {
+  position: relative;
+  top: 5px;
+  left: 5px;
+  height: 40px;
+  width: 40px;
+  background-color: #d2d2d2;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-1 {
+  position: relative;
+  top: 3px;
+  left: 5px;
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.title-2 {
+  position: relative;
+  top: 1px;
+  left: 5px;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: -0.2px;
+}
+
+.time {
+  width: 90%;
+  background-color: #5e5e5e;
+  height: 6px;
+  border-radius: 3px;
+  position: absolute;
+  left: 5%;
+  bottom: 22px;
+}
+
+.elapsed {
+  width: 0%;
+  background-color: #1db954;
+  height: 100%;
+  border-radius: 3px;
+}
+
+.controls {
+  top: -43px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-top: 10px;
+}
+
+.timetext {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  color: #ffffff;
+  position: absolute;
+}
+
+.time_now {
+  font-size: 9px;
+  left: 0;
+  top: 48px;
+}
+
+.time_full {
+  font-size: 9px;
+  right: 0;
+  top: 48px;
+}
+
+.timer-wrapper {
+  position: relative;
+  top: -22px;
+  width: 100%;
+  height: 20px;
+  margin-top: 8px;
+}
+
+.playing {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  gap: 4px;
+  width: 30px;
+  height: 20px;
+}
+
+.greenline {
+  background-color: #1db954;
+  height: 20px;
+  width: 2px;
+  position: relative;
+  transform-origin: bottom;
+}
+
+.line-1, .line-2, .line-3, .line-4, .line-5 {
+  display: none !important;
+}
+
+.is-playing .line-1,
+.is-playing .line-2,
+.is-playing .line-3,
+.is-playing .line-4,
+.is-playing .line-5 {
+  display: block !important;
+  animation: playing 1s ease infinite;
+}
+
+.is-playing .line-1 { animation-delay: 0.0s; }
+.is-playing .line-2 { animation-delay: 0.2s; }
+.is-playing .line-3 { animation-delay: 0.4s; }
+.is-playing .line-4 { animation-delay: 0.6s; }
+.is-playing .line-5 { animation-delay: 0.8s; }
+
+@keyframes playing {
+  0% {
+    transform: scaleY(0.1);
+  }
+
+  33% {
+    transform: scaleY(0.6);
+  }
+
+  66% {
+    transform: scaleY(0.9);
+  }
+
+  100% {
+    transform: scaleY(0.1);
+  }
+}
+
+.control-btn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  width: 28px;
+  top: 30px;
+  z-index: 1;
+}
+
+.control-btn svg {
+  position: relative;
+  height: 28px;
+  width: 28px;
+}
+
+audio.canplay + .time_now {
+  visibility: visible;
+}
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 35px;
+  position: absolute;
+  left: 5px;
+  top: 45px;
+  z-index: 1;
+}
+  
+.volume-icon, .volume-icon-muted {
+  color: white;
+  cursor: pointer;
+  width: 12px;
+  height: 12px;
+}
+
+.volume-slider {
+  width: 60px;
+  height: 4px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: #5e5e5e;
+  border-radius: 2px;
+  outline: none;
+  position: relative;
+  bottom: 0px;
+  left: -5px;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  top: -2px;
+}
+
+.volume-slider::-webkit-slider-runnable-track {
+  background: linear-gradient(to right, #1db954 var(--volume-percentage), #5e5e5e var(--volume-percentage));
+  border-radius: 2px;
+  height: 4px;
+}
+
+.next-button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 25px;
+    z-index: 1000;
+    opacity: 0;
+    animation: fadeIn 1s ease forwards;
+    /* animation-delay: 40s; */
+}
+
+.next-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 904px) {
+  .wrapper {
+    transform: scale(1.6);
+  }
+  .card {
+    transform: scale(0.8);
+  }
+  .next-button {
+    transform: scale(0.8);
+    margin-right: -15px;
+    margin-bottom: -6px;
+  }
+}

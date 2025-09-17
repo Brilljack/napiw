@@ -1,0 +1,677 @@
+body {
+    background-color: #435B66;
+}
+
+.clickable{
+  -webkit-tap-highlight-color: transparent;
+}
+
+#envelope {
+  margin: 0;
+  top: 0;
+  position: relative;
+  width: 280px;
+  height: 180px;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ffc0cb;
+  box-shadow: 
+    0 0 15px rgba(255, 182, 193, 0.3),
+    0 0 30px rgba(255, 99, 177, 0.2),
+    0 0 45px rgba(108, 99, 255, 0.1);
+  animation: multiColorGlow 3s ease-in-out infinite alternate;
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes multiColorGlow {
+  0% {
+    box-shadow: 
+      0 0 15px rgba(255, 182, 193, 0.3),
+      0 0 30px rgba(255, 99, 177, 0.2),
+      0 0 45px rgba(108, 99, 255, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 20px rgba(255, 107, 129, 0.4),
+      0 0 35px rgba(255, 182, 193, 0.3),
+      0 0 50px rgba(177, 99, 255, 0.2);
+  }
+  100% {
+    box-shadow: 
+      0 0 25px rgba(255, 99, 132, 0.5),
+      0 0 40px rgba(132, 99, 255, 0.3),
+      0 0 55px rgba(99, 199, 255, 0.2);
+  }
+}
+
+.start-container {
+  text-align: center;
+  position: absolute;
+  width: max-content;
+  left: 50%;
+  top: calc(50% - 220px);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 10;
+}
+
+h1 {
+  color: #ff4d6d;
+  margin: 0;
+  text-shadow: 
+    2px 2px 4px rgba(255, 51, 85, 0.2),
+    0 0 15px rgba(255, 99, 177, 0.3),
+    0 0 30px rgba(255, 182, 193, 0.2);
+  font-family: 'Dancing Script', cursive;
+  font-size: 2em;
+  letter-spacing: 2px;
+  /* animation: floating 3s ease-in-out infinite, textGlow 2s ease-in-out infinite alternate; */
+  background: linear-gradient(45deg, #ff6b8b, #ff3355, #ff99cc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding: 10px;
+  /* white-space: nowrap; */
+  width: 330px;
+  display: inline-block;
+  position: relative;
+}
+
+@keyframes floating {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes textGlow {
+  0% {
+    text-shadow: 
+      2px 2px 4px rgba(255, 51, 85, 0.2),
+      0 0 15px rgba(255, 99, 177, 0.3),
+      0 0 30px rgba(255, 182, 193, 0.2);
+  }
+  100% {
+    text-shadow: 
+      2px 2px 4px rgba(255, 51, 85, 0.3),
+      0 0 20px rgba(255, 99, 177, 0.4),
+      0 0 40px rgba(255, 182, 193, 0.3);
+  }
+}
+
+/* Tambahkan style untuk kondisi open */
+#envelope.open + .start-container {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+/* Tambahkan style untuk kondisi close */
+#envelope.close + .start-container {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.4s 0.8s ease;
+}
+
+.front {
+  position: absolute;
+  width: 0;
+  height: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.flap {
+  border-left: 140px solid transparent;
+  border-right: 140px solid transparent;
+  border-bottom: 82px solid transparent;
+  /* a little smaller */
+  border-top: 98px solid #ff6b8b;
+  /* a little larger */
+  transform-origin: top;
+  pointer-events: none;
+}
+
+.pocket {
+  border-left: 140px solid #ff8fa3;
+  border-right: 140px solid #ff8fa3;
+  border-bottom: 90px solid #ff7088;
+  border-top: 90px solid transparent;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  pointer-events: none;
+}
+
+.letter {
+  position: relative;
+  background-color: #fff0f3;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 90%;
+  top: 5%;
+  border-radius: 6px;
+  box-shadow: 0 2px 26px rgba(255, 182, 193, 0.25);
+  transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  overflow: hidden;
+  transform-origin: bottom;
+  z-index: 4;
+}
+
+.letter:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 70%,
+    rgba(239, 215, 239, 0.3) 85%,
+    #eed7ef 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.words {
+  position: absolute;
+  left: 10%;
+  width: 80%;
+  height: 14%;
+  /* background-color: #fdb7ba; */
+  text-shadow: 0 0 10px rgba(255, 77, 109, 0.3);
+}
+
+.words.line1 {
+  top: 15%;
+  width: 20%;
+  height: 7%;
+}
+
+.words.line2 {
+  top: 30%;
+}
+
+.words.line3 {
+  top: 50%;
+}
+
+.words.line4 {
+  top: 70%;
+}
+
+.open .flap {
+  transform: rotateX(180deg);
+  transition: transform 0.4s ease, z-index 0.6s;
+  z-index: 1;
+}
+
+.close .flap {
+  transform: rotateX(0deg);
+  transition: transform 0.4s 0.6s ease, z-index 1s;
+  z-index: 5;
+}
+
+.close .letter {
+  height: 90%;
+  top: 5%;
+  transform: translateY(0px);
+  transition: transform 0.4s ease,
+             height 0.4s ease,
+             top 0.4s ease,
+             z-index 1s;
+  z-index: 1;
+}
+
+.open .letter {
+  height: 150%;
+  top: -60%;
+  transform: translateY(-60px);
+  transition: transform 0.4s 0.6s ease, 
+             height 0.4s 0.6s ease,
+             top 0.4s 0.6s ease,
+             z-index 0.6s;
+  z-index: 2;
+}
+
+.hearts {
+  position: absolute;
+  top: 90px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.heart {
+  position: absolute;
+  bottom: 0;
+  right: 10%;
+  pointer-events: none;
+}
+
+.heart:before,
+.heart:after {
+  position: absolute;
+  content: "";
+  left: 50px;
+  top: 0;
+  width: 50px;
+  height: 80px;
+  background: #ff3355;
+  border-radius: 50px 50px 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+  pointer-events: none;
+  box-shadow: 0 0 15px #ff3355;
+}
+
+.heart:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+.close .heart {
+  opacity: 0;
+  -webkit-animation: none;
+  animation: none;
+}
+
+.a1 {
+  left: 20%;
+  transform: scale(0.6);
+  opacity: 1;
+  -webkit-animation: slideUp 4s linear 1, sideSway 2s ease-in-out 4 alternate;
+  -moz-animation: slideUp 4s linear 1, sideSway 2s ease-in-out 4 alternate;
+  animation: slideUp 4s linear 1, sideSway 2s ease-in-out 4 alternate;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.7s;
+  -moz-animation-delay: 0.7s;
+  animation-delay: 0.7s;
+}
+
+.a2 {
+  left: 55%;
+  transform: scale(1);
+  opacity: 1;
+  -webkit-animation: slideUp 5s linear 1, sideSway 4s ease-in-out 2 alternate;
+  -moz-animation: slideUp 5s linear 1, sideSway 4s ease-in-out 2 alternate;
+  animation: slideUp 5s linear 1, sideSway 4s ease-in-out 2 alternate;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.7s;
+  -moz-animation-delay: 0.7s;
+  animation-delay: 0.7s;
+}
+
+.a3 {
+  left: 10%;
+  transform: scale(0.8);
+  opacity: 1;
+  -webkit-animation: slideUp 7s linear 1, sideSway 2s ease-in-out 6 alternate;
+  -moz-animation: slideUp 7s linear 1, sideSway 2s ease-in-out 6 alternate;
+  animation: slideUp 7s linear 1, sideSway 2s ease-in-out 6 alternate;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-delay: 0.7s;
+  -moz-animation-delay: 0.7s;
+  animation-delay: 0.7s;
+}
+
+@-webkit-keyframes slideUp {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -600px;
+  }
+}
+@keyframes slideUp {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: -600px;
+  }
+}
+@-webkit-keyframes sideSway {
+  0% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: 50px;
+  }
+}
+@keyframes sideSway {
+  0% {
+    margin-left: 0px;
+  }
+  100% {
+    margin-left: 50px;
+  }
+}
+
+.envlope-wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.reset {
+  position: absolute;
+  top: calc(50% + 200px);
+  left: 0;
+  right: 0;
+  text-align: center;
+  transform: translateY(-50%);
+}
+
+.reset button {
+  font-weight: 700;
+  font-style: normal;
+  font-family: 'Dancing Script', cursive;
+  transition: all 0.3s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  border: none;
+  color: white;
+  display: inline-block;
+  font-size: 18px;
+  text-transform: capitalize;
+  margin: 5px;
+  padding: 12px 32px;
+  border-radius: 50px;
+  letter-spacing: 1.5px;
+  background: linear-gradient(45deg, #ff6b8b, #ff3355);
+  box-shadow: 
+    0 4px 15px rgba(255, 51, 85, 0.3),
+    0 0 15px rgba(255, 182, 193, 0.3),
+    0 0 30px rgba(255, 99, 177, 0.2);
+  position: relative;
+  overflow: hidden;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reset button::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  z-index: -1;
+  background: linear-gradient(235deg, #ff6b8b, #ff3355, #ff99cc);
+  border-radius: 50px;
+  animation: glowingBorder 3s linear infinite;
+}
+
+.reset button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, #ff6b8b, #ff3355);
+  border-radius: 50px;
+  z-index: -1;
+}
+
+.reset button:active {
+  transform: translateY(2px);
+}
+
+@keyframes glowingBorder {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.letter .loader {
+  transform: scale(0.3);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.7); /*merubah ukuran truck*/
+  z-index: 2;
+}
+
+.letter .truckWrapper {
+  width: 180px;
+  height: 90px;
+  margin-top: 0;
+}
+
+.letter .road {
+  background-color: #ff9999;
+}
+
+.letter .road::before,
+.letter .road::after {
+  background-color: #ff9999;
+}
+
+.close .loader {
+  display: none;
+}
+
+.open .loader {
+  display: flex;
+}
+
+.loader {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .truckWrapper {
+    width: 200px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    justify-content: flex-end;
+    overflow-x: hidden;
+  }
+  /* truck upper body */
+  .truckBody {
+    width: 110px;
+    height: auto;
+    margin-bottom: 6px;
+    animation: motion 1s linear infinite;
+  }
+  /* truck suspension animation*/
+  @keyframes motion {
+    0% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(3px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  /* truck's tires */
+  .truckTires {
+    width: 90px;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 8px 0px 12px;
+    position: absolute;
+    bottom: 0;
+  }
+  .truckTires svg {
+    width: 20px;
+  }
+  
+  .road {
+    width: 100%;
+    height: 2px;
+    background-color: #282828;
+    position: relative;
+    bottom: 0;
+    align-self: flex-end;
+    border-radius: 3px;
+  }
+  .road::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 100%;
+    background-color: #282828;
+    right: -50%;
+    border-radius: 3px;
+    animation: roadAnimation 1.4s linear infinite;
+    border-left: 10px solid white;
+  }
+  .road::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 100%;
+    background-color: #282828;
+    right: -65%;
+    border-radius: 3px;
+    animation: roadAnimation 1.4s linear infinite;
+    border-left: 4px solid white;
+  }
+  
+  .lampPost {
+    position: absolute;
+    bottom: 0;
+    right: -90%;
+    height: 90px;
+    animation: roadAnimation 1.4s linear infinite;
+  }
+  
+  @keyframes roadAnimation {
+    0% {
+      transform: translateX(0px);
+    }
+    100% {
+      transform: translateX(-350px);
+    }
+  }
+
+.truck-message {
+  position: absolute;
+  width: 90%;
+  text-align: center;
+  top: 15%;
+  left: 10px;
+  font-size: 16px;
+  color: #ff3355;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  text-shadow: 0 0 10px rgba(255, 51, 85, 0.3);
+  z-index: 2;
+}
+
+.letter-button {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: auto;
+}
+
+.cute-button {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  font-size: 14px;
+  padding: 8px 20px;
+  border-radius: 20px;
+  background-image: linear-gradient(rgb(255, 182, 193), rgb(255, 105, 180));
+  border: 2px solid rgb(255, 20, 147);
+  box-shadow: 0px 1px 6px 0px rgba(255, 105, 180, 0.5);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+  pointer-events: auto;
+}
+
+.cute-button:active {
+  transform: translateY(0);
+}
+
+.close .letter-button {
+  display: none;
+}
+
+.open .letter-button {
+  display: block;
+}
+
+/* Mempercantik road animation */
+.road {
+  background: linear-gradient(90deg, #ff6b8b, #ff3355);
+  height: 3px;
+  box-shadow: 0 0 10px rgba(255, 51, 85, 0.5);
+}
+
+.road::before,
+.road::after {
+  background: linear-gradient(90deg, #ff6b8b, #ff3355);
+  box-shadow: 0 0 10px rgba(255, 51, 85, 0.5);
+}
+
+/* Menambahkan efek gradient untuk truck message */
+.truck-message {
+  background: linear-gradient(45deg, #ff6b8b, #ff3355);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 2px 2px 4px rgba(255, 51, 85, 0.2);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+/* Animasi smooth untuk semua transisi */
+* {
+  transition: all 0.3s ease;
+}
+
+@keyframes heartGlow {
+  0% {
+    box-shadow: 
+      0 0 15px #ff3355,
+      0 0 25px rgba(255, 99, 177, 0.5),
+      0 0 35px rgba(108, 99, 255, 0.3);
+  }
+  100% {
+    box-shadow: 
+      0 0 20px #ff3355,
+      0 0 30px rgba(177, 99, 255, 0.6),
+      0 0 40px rgba(99, 199, 255, 0.4);
+  }
+}
+
+@media screen and (max-width: 904px) {
+  .envlope-wrapper {
+    transform: scale(0.8);
+  }
+  .reset {
+    transform: scale(0.9);
+    top: calc(50% + 120px);
+  }
+}
