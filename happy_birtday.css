@@ -471,7 +471,7 @@ p > a:first-of-type {
     height: 100%;
     opacity: 0;
     visibility: hidden;
-    /* transition: opacity 0.5s ease;*/ /*transisi antar halaman */
+    transition: opacity 0.5s ease;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -490,13 +490,18 @@ p > a:first-of-type {
 
 /* Spesifik untuk halaman birthday */
 #birthday-page {
-    background-color: #000; /* atau warna yang sesuai dengan tema birthday */
+    background-color: #000;
+}
+
+/* TAMBAHAN: Spesifik untuk halaman flower */
+#flower-page {
+    background-color: #000;
 }
 
 /* Memastikan wrapper mesin ketik berada di tengah */
 #mesinketik-page .wrapper {
     position: relative;
-    top: 170px; /* mengubah dari 100px ke 0 */
+    top: 170px;
 }
 
 /* Memastikan card musik selalu di atas */

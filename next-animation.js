@@ -43,61 +43,37 @@ document.addEventListener('DOMContentLoaded', function() {
   
   const caption = document.createElement('div');
   caption.className = 'photo-caption';
-  caption.textContent = '💕 The one I’ll never replace 💕'; // Ubah teks caption sesuai keinginan
+  caption.textContent = 'The one I’ll never replace';
   
-  // Buat tombol next baru untuk ke flower.html
+  // Buat tombol next baru untuk ke flower-page
   const flowerNextBtn = document.createElement('button');
   flowerNextBtn.className = 'flower-next-btn';
-  flowerNextBtn.innerHTML = `
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
-    </svg>
-    <span>Next</span>
-  `;
+  flowerNextBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg><span>Next</span>';
   
   // Style untuk tombol flower next
-  flowerNextBtn.style.cssText = `
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: linear-gradient(135deg, #FF6B9D, #C44B9F);
-    border: none;
-    border-radius: 50px;
-    padding: 15px 25px;
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    display: none;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
-    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-    z-index: 1000;
-    font-family: 'Arial', sans-serif;
-    opacity: 0;
-  `;
+  flowerNextBtn.style.cssText = 'position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(100px); background: linear-gradient(135deg, #FF6B9D, #C44B9F); border: none; border-radius: 50px; padding: 15px 25px; color: white; font-size: 16px; font-weight: 600; cursor: pointer; display: none; align-items: center; gap: 8px; box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4); transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 1000; font-family: Arial, sans-serif; opacity: 0;';
   
-  // Hover effects untuk tombol flower next
-  flowerNextBtn.addEventListener('mouseenter', function() {
-    this.style.transform = 'translateY(-3px) scale(1.05)';
-    this.style.boxShadow = '0 12px 35px rgba(255, 107, 157, 0.6)';
-  });
-  
-  flowerNextBtn.addEventListener('mouseleave', function() {
-    this.style.transform = 'translateY(0) scale(1)';
-    this.style.boxShadow = '0 8px 25px rgba(255, 107, 157, 0.4)';
-  });
-  
-  // Event listener untuk navigasi ke flower.html
+  // Event listener untuk navigasi ke flower-page
   flowerNextBtn.addEventListener('click', function() {
-    // Tambahkan efek transisi sebelum pindah halaman
-    document.body.style.transition = 'opacity 0.5s ease-out';
-    document.body.style.opacity = '0';
-    
+    const birthdayPage = document.getElementById('birthday-page');
+    const flowerPage = document.getElementById('flower-page');
+
+    // PERBAIKAN: Sembunyikan balon foto terlebih dahulu
+    photoContainer.classList.remove('show');
+    photoContainer.classList.add('hide');
+    flowerNextBtn.style.display = 'none';
+
+    // Sembunyikan halaman birthday dengan animasi fade out
+    birthdayPage.style.transition = 'opacity 0.5s ease-out';
+    birthdayPage.style.opacity = '0';
+
+    // Setelah animasi fade out selesai
     setTimeout(() => {
-      window.location.href = 'flower.html';
+      birthdayPage.classList.remove('active');
+      flowerPage.classList.add('active');
+      
+      // Jalankan animasi title untuk flower page
+      initializeFlowerPage();
     }, 500);
   });
   
@@ -106,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
   photoContainer.appendChild(photoFrame);
   photoContainer.appendChild(caption);
   document.body.appendChild(photoContainer);
-  document.body.appendChild(flowerNextBtn); // Tambahkan tombol flower next ke body, bukan container
+  document.body.appendChild(flowerNextBtn);
 
   let isShowingBalloon = false;
   nextBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>';
@@ -121,13 +97,13 @@ document.addEventListener('DOMContentLoaded', function() {
       photoContainer.classList.remove('hide');
       photoContainer.classList.add('show');
       
-      // Tampilkan tombol flower next dengan delay 5 detik dan animasi ease in
+      // Tampilkan tombol flower next dengan delay 5 detik
       flowerNextBtn.style.display = 'flex';
       
       setTimeout(() => {
         flowerNextBtn.style.opacity = '1';
         flowerNextBtn.style.transform = 'translateX(-50%) translateY(0)';
-      }, 5000); // Delay 5 detik
+      }, 5000);
       
       nextBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>';
     } else {
@@ -150,3 +126,35 @@ document.addEventListener('DOMContentLoaded', function() {
     isShowingBalloon = !isShowingBalloon;
   });
 });
+
+// Fungsi untuk menjalankan animasi flower page
+function initializeFlowerPage() {
+  const title = document.querySelector('#flower-page .title');
+  if (!title) return;
+  
+  const text = 'One last question'.split('');
+  title.innerHTML = '';
+  
+  for (let index = 0; index < text.length; index++) {
+    if (text[index] !== ' ') {
+      title.innerHTML += '<span>' + text[index] + '</span>';
+    } else {
+      title.innerHTML += '<span style="margin-right: 20px;"></span>';
+    }
+  }
+
+  const textElements = document.querySelectorAll('#flower-page .title span');
+  textElements.forEach((element) => {
+    const randomDelay = Math.random() * 2;
+    element.style.animationDelay = randomDelay + 's';
+  });
+
+  // Event listener untuk tombol Open di flower page
+  const flowerOpenBtn = document.querySelector('.flower-open-btn');
+  if (flowerOpenBtn) {
+    flowerOpenBtn.addEventListener('click', function() {
+      // Ganti dengan navigasi ke halaman selanjutnya
+      alert('Tombol Open diklik! Ganti dengan aksi yang diinginkan.');
+    });
+  }
+}
