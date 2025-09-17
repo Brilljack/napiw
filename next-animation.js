@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
   const caption = document.createElement('div');
   caption.className = 'photo-caption';
-  caption.textContent = 'The one I’ll never replace';
+  caption.textContent = '💕 The one I’ll never replace 💕';
   
   // Buat tombol next baru untuk ke flower-page
   const flowerNextBtn = document.createElement('button');

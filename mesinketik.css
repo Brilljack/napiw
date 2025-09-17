@@ -32,7 +32,7 @@ body {
   --text: #D3D4EC;
   --tool: #FBC56C;
   --duration: 3s; /* Menambahkan durasi animasi keluar*/
-  --paper-duration: 40s; /* Menambahkan durasi animasi kertas keluar*/
+  --paper-duration: 50s; /* Menambahkan durasi animasi kertas keluar*/
   position: relative;
   animation: bounce05 calc(var(--duration) * 0.5) linear;
   animation-iteration-count: 19; /* Menambahkan animasi bounce 19 kali */
@@ -580,7 +580,7 @@ audio.canplay + .time_now {
     z-index: 1000;
     opacity: 0;
     animation: fadeIn 1s ease forwards;
-    /* animation-delay: 40s; */
+    animation-delay: 50s;
 }
 
 .next-button {
