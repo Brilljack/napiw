@@ -51,8 +51,29 @@ document.addEventListener('DOMContentLoaded', function() {
   flowerNextBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg><span>Next</span>';
   
   // Style untuk tombol flower next
-  flowerNextBtn.style.cssText = 'position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%) translateY(100px); background: linear-gradient(135deg, #FF6B9D, #C44B9F); border: none; border-radius: 50px; padding: 15px 25px; color: white; font-size: 16px; font-weight: 600; cursor: pointer; display: none; align-items: center; gap: 8px; box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4); transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1); z-index: 1000; font-family: Arial, sans-serif; opacity: 0;';
-  
+  flowerNextBtn.style.cssText = `
+  position: fixed;
+  bottom: 80px; /* supaya pas di atas tombol kembali */
+  left: 95.5%; /* Posisikan elemen 50% dari kiri viewport */
+  transform: translateX(50%); /* Geser elemen ke kanan sebesar 50% dari lebarnya sendiri */
+  background: linear-gradient(135deg, #FF6B9D, #C44B9F);
+  border: none;
+  border-radius: 50px;
+  padding: 15px 25px;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 1000;
+  font-family: Arial, sans-serif;
+  opacity: 0;
+`;
+
   // Event listener untuk navigasi ke flower-page
   flowerNextBtn.addEventListener('click', function() {
     const birthdayPage = document.getElementById('birthday-page');
@@ -156,8 +177,53 @@ function initializeFlowerPage() {
   const flowerOpenBtn = document.querySelector('.flower-open-btn');
   if (flowerOpenBtn) {
     flowerOpenBtn.addEventListener('click', function() {
-      // Ganti dengan navigasi ke halaman selanjutnya
-      alert('Tombol Open diklik! Ganti dengan aksi yang diinginkan.');
+      // Navigasi ke flower2 content tanpa reload
+      showFlower2Page();
     });
   }
+}
+
+// Fungsi untuk menampilkan flower2 page
+function showFlower2Page() {
+  const flowerPage = document.getElementById('flower-page');
+  const flower2Page = document.getElementById('flower2-page');
+
+  // Sembunyikan flower page
+  flowerPage.style.transition = 'opacity 0.5s ease-out';
+  flowerPage.style.opacity = '0';
+
+  setTimeout(() => {
+    flowerPage.classList.remove('active');
+    flower2Page.classList.add('active');
+    
+    // Initialize flower2 animations
+    initializeFlower2();
+  }, 500);
+}
+
+// Fungsi untuk inisialisasi flower2
+function initializeFlower2() {
+  // Remove not-loaded class to start animations
+  document.body.classList.remove("not-loaded");
+
+  const titles = ('You feel like home to me. Will you be mine?').split('');
+  const titleElement = document.getElementById('flower2-title');
+  titleElement.innerHTML = '';
+
+  // 👉 Tambahin baris ini untuk atur ukuran font
+  titleElement.style.fontSize = '35px'; // ganti sesuai kebutuhan
+
+  let index = 0;
+
+  function appendTitle() {
+    if (index < titles.length) {
+      titleElement.innerHTML += titles[index];
+      index++;
+      setTimeout(appendTitle, 200);
+    }
+  }
+
+  setTimeout(() => {
+    appendTitle();
+  }, 1000);
 }
